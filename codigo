@@ -1,0 +1,50 @@
+pip install python-docx fpdf
+
+# Importa as bibliotecas necessárias
+from docx import Document
+from fpdf import FPDF
+import os
+
+# Caminhos para o arquivo Word e para o PDF de saída
+word_file_path = r'C:\Users\rapha\OneDrive\Área de Trabalho\pdf rico camminho d arquiv wrd'
+pdf_output_path = r'C:\Users\rapha\OneDrive\Área de Trabalho\documento_convertido.pdf'
+
+def convert_word_to_pdf(word_file_path, pdf_output_path):
+    """
+    Converte um arquivo Word para PDF.
+
+    Parâmetros:
+        word_file_path (str): O caminho para o arquivo Word a ser convertido.
+        pdf_output_path (str): O caminho onde o arquivo PDF convertido será salvo.
+
+    Descrição:
+        Esta função lê um arquivo Word (.docx) e converte seu conteúdo para um arquivo PDF.
+        O texto é extraído e adicionado ao PDF com codificação adequada para caracteres especiais.
+    """
+    # Verifica se o arquivo Word existe
+    if not os.path.exists(word_file_path):
+        print(f"Arquivo Word não encontrado: {word_file_path}")
+        return
+
+    # Abre o documento Word
+    document = Document(word_file_path)
+
+    # Cria um objeto PDF
+    pdf = FPDF()
+    pdf.add_page()
+
+    # Define a fonte e o tamanho para o PDF
+    pdf.set_font("Arial", size=12)
+
+    # Itera sobre os parágrafos no documento Word e escreve no PDF
+    for para in document.paragraphs:
+        # Codifica o texto para 'latin-1' para lidar com caracteres especiais
+        text = para.text.encode('latin-1', 'replace').decode('latin-1')
+        pdf.multi_cell(0, 10, text)
+
+    # Salva o arquivo PDF
+    pdf.output(pdf_output_path)
+    print(f"Arquivo PDF criado com sucesso: {pdf_output_path}")
+
+# Chama a função para converter o arquivo Word para PDF
+convert_word_to_pdf(word_file_path, pdf_output_path)

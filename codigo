@@ -10,17 +10,7 @@ word_file_path = r'C:\Users\rapha\OneDrive\Área de Trabalho\pdf rico camminho d
 pdf_output_path = r'C:\Users\rapha\OneDrive\Área de Trabalho\documento_convertido.pdf'
 
 def convert_word_to_pdf(word_file_path, pdf_output_path):
-    """
-    Converte um arquivo Word para PDF.
-
-    Parâmetros:
-        word_file_path (str): O caminho para o arquivo Word a ser convertido.
-        pdf_output_path (str): O caminho onde o arquivo PDF convertido será salvo.
-
-    Descrição:
-        Esta função lê um arquivo Word (.docx) e converte seu conteúdo para um arquivo PDF.
-        O texto é extraído e adicionado ao PDF com codificação adequada para caracteres especiais.
-    """
+   
     # Verifica se o arquivo Word existe
     if not os.path.exists(word_file_path):
         print(f"Arquivo Word não encontrado: {word_file_path}")
